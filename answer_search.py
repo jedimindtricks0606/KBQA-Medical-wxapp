@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
 # coding: utf-8
 # File: answer_search.py
-# Author: lhy<lhy_in_blcu@126.com,https://huangyong.github.io>
-# Date: 18-10-5
 
 from py2neo import Graph
 
+# 第三步：执行cypher查询，并返回相应结果
+# Neo4j使用Cypher查询图形数据；Cypher是描述性的图形查询语言。
 class AnswerSearcher:
     def __init__(self):
         self.g = Graph(
-            host="127.0.0.1",
-            http_port=7474,
-            user="lhy",
-            password="lhy123")
+            host="localhost",
+            http_port=7687,
+            user="neo4j",
+            password="12345678")
         self.num_limit = 20
 
     '''执行cypher查询，并返回相应结果'''
-    def search_main(self, sqls):
+
+    def search_main(self, sqls) -> list:
         final_answers = []
         for sql_ in sqls:
             question_type = sql_['question_type']
@@ -31,7 +32,8 @@ class AnswerSearcher:
         return final_answers
 
     '''根据对应的qustion_type，调用相应的回复模板'''
-    def answer_prettify(self, question_type, answers):
+
+    def answer_prettify(self, question_type, answers) -> list:
         final_answer = []
         if not answers:
             return ''
@@ -79,7 +81,7 @@ class AnswerSearcher:
         elif question_type == 'disease_desc':
             desc = [i['m.desc'] for i in answers]
             subject = answers[0]['m.name']
-            final_answer = '{0},熟悉一下：{1}'.format(subject,  '；'.join(list(set(desc))[:self.num_limit]))
+            final_answer = '{0},熟悉一下：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_acompany':
             desc1 = [i['n.name'] for i in answers]
@@ -97,7 +99,8 @@ class AnswerSearcher:
             do_desc = [i['n.name'] for i in answers if i['r.name'] == '宜吃']
             recommand_desc = [i['n.name'] for i in answers if i['r.name'] == '推荐食谱']
             subject = answers[0]['m.name']
-            final_answer = '{0}宜食的食物包括有：{1}\n推荐食谱包括有：{2}'.format(subject, ';'.join(list(set(do_desc))[:self.num_limit]), ';'.join(list(set(recommand_desc))[:self.num_limit]))
+            final_answer = '{0}宜食的食物包括有：{1}\n推荐食谱包括有：{2}'.format(subject, ';'.join(list(set(do_desc))[:self.num_limit]),
+                                                                 ';'.join(list(set(recommand_desc))[:self.num_limit]))
 
         elif question_type == 'food_not_disease':
             desc = [i['m.name'] for i in answers]

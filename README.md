@@ -30,7 +30,50 @@ self-implement of disease centered Medical graph from zero to full and sever as 
 prepare_data/datasoider.py：网络资讯采集脚本  
 prepare_data/datasoider.py：网络资讯采集脚本  
 prepare_data/max_cut.py：基于词典的最大向前/向后切分脚本  
-build_medicalgraph.py：知识图谱入库脚本    　　
+build_medicalgraph.py：知识图谱入库脚本    
+
+```
+.
+├── README.md
+├── __pycache__      \\编译结果保存目录
+│   ├── answer_search.cpython-36.pyc
+│   ├── question_classifier.cpython-36.pyc
+│   └── question_parser.cpython-36.pyc
+├── answer_search.py
+├── answer_search.pyc
+├── build_medicalgraph.py    \\知识图谱数据入库脚本
+├── chatbot_graph.py    \\问答程序脚本
+├── data
+│   └── medicaln.json \\本项目的全部数据，通过build_medicalgraph.py导neo4j
+├── dict
+│   ├── check.txt    \\诊断检查项目实体库
+│   ├── deny.txt      \\否定词库
+│   ├── department.txt  \\医疗科目实体库
+│   ├── disease.txt    \\疾病实体库
+│   ├── drug.txt      \\药品实体库
+│   ├── food.txt      \\食物实体库
+│   ├── producer.txt    \\在售药品库
+│   └── symptom.txt    \\疾病症状实体库
+├── document
+│   ├── chat1.png    \\系统运行问答截图01
+│   ├── chat2.png      \\系统运行问答截图01
+│   ├── kg_route.png    \\知识图谱构建框架
+│   ├── qa_route.png    \\问答系统框架图
+├── img    \\README.md中的所用图片
+│   ├── chat1.png
+│   ├── chat2.png
+│   ├── graph_summary.png
+│   ├── kg_route.png
+│   └── qa_route.png
+├── prepare_data
+│   ├── build_data.py    \\数据库操作脚本
+│   ├── data_spider.py    \\网络资讯采集脚本
+│   └── max_cut.py      \\基于词典的最大向前/向后脚本
+├── question_classifier.py    \\问句类型分类脚本
+├── question_classifier.pyc    
+├── question_parser.py    \\问句解析脚本
+├── question_parser.pyc　　
+```
 
 # 1.3 医药领域知识图谱规模
 1.3.1 neo4j图数据库存储规模
@@ -199,7 +242,6 @@ chatbot_graph.py：问答程序脚本
 5、本项目还有不足：关于疾病的起因、预防等，实际返回的是一大段文字，这里其实可以引入事件抽取的概念，进一步将原因结构化表示出来。这个可以后面进行尝试。    
 
 If any question about the project or me ,see https://liuhuanyong.github.io/
-
 
 如有自然语言处理、知识图谱、事理图谱、社会计算、语言资源建设等问题或合作，可联系我：    
 1、我的github项目介绍：https://liuhuanyong.github.io  
